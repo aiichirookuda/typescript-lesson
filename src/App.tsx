@@ -15,11 +15,17 @@ let array2 = [0, 1, 'hello']
 
 // オブジェクトの型の定義の方法
 interface NAME {
-  first: string
-  last: string
+  first: string;
+  last: string;
 }
+// memo: 「last?: stringというように記載することでlastの要素がなくても大丈夫になる。
+// memo: 「last: string | null」でnullでも受け取れるようになる。
 
 let nameObj: NAME = {first: 'Yamada', last: 'Taro'};
+
+const func1 = (x: number, y:number): number => {
+  return x + y;
+}
 
 function App() {
   return (
