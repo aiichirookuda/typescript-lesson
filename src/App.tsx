@@ -63,6 +63,14 @@ company = "Amazon";
 let memory: 256 | 512;
 memory = 512;
 
+// typeof ...宣言済み変数の型を取得するもの。(型の継承)
+let msg: string = "Hi";
+let msg2: typeof msg; //msgと同じ型を継承する。
+msg2 = "hello";
+
+let animal = { cat: "small cat" };
+let newAnimal: typeof animal = { cat: "big cat" };
+
 function App() {
   return (
     <div className="App">
