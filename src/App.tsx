@@ -1,17 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { StringLiteralLike } from 'typescript';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { StringLiteralLike } from "typescript";
 
-const name = 'hello'; //リテラル型
+const name = "hello"; //リテラル型
 
-let username: string = 'Hello'; //文字列型
+let username: string = "Hello"; //文字列型
 let dummyNum: number = 2; //数値型
 let dool: boolean = true; //ブーリアン型
 // 上記のように明示的にデータ型を指定することをアノーテーションという。
 
 let array1 = [true, false, true];
-let array2 = [0, 1, 'hello']
+let array2 = [0, 1, "hello"];
 
 // オブジェクトの型の定義の方法
 interface NAME {
@@ -21,11 +21,11 @@ interface NAME {
 // memo: 「last?: stringというように記載することでlastの要素がなくても大丈夫になる。
 // memo: 「last: string | null」でnullでも受け取れるようになる。
 
-let nameObj: NAME = {first: 'Yamada', last: 'Taro'};
+let nameObj: NAME = { first: "Yamada", last: "Taro" };
 
-const func1 = (x: number, y:number): number => {
+const func1 = (x: number, y: number): number => {
   return x + y;
-}
+};
 
 // Intersection Types ...２つのtypeを結合するもの。
 type PROFILE = {
@@ -42,10 +42,19 @@ type USER = PROFILE & LOGIN;
 
 const userA: USER = {
   age: 30,
-  city: 'Tokyo',
-  username: 'xxx',
-  password: 'yyy',
-}
+  city: "Tokyo",
+  username: "xxx",
+  password: "yyy",
+};
+
+// Union Types ...変数が受取れるデータ型を制限する。
+let value: boolean | number;
+value = true;
+value = 10;
+
+// 配列が受け取るデータも制限可能。
+let arrayUni: (number | string)[];
+arrayUni = [0, 1, 2, "hello"];
 
 function App() {
   return (
