@@ -91,9 +91,9 @@ keySports = "soccer";
 // enum ...オブジェクトの中身に自動的に連番を振ってくれる。
 // マニュアルで割り振るよりもソフトウェアのバグなども発生しにくく、メンテナンスも容易になる。
 enum OS {
-  Windows,
-  Mac,
-  Linux,
+  Windows, //OS.Windows = 0
+  Mac, //OS.Mac = 1
+  Linux, //OS.Linux = 2
 }
 interface PC {
   id: number;
