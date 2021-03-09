@@ -121,6 +121,55 @@ let funcComp2 = (x: string) => {};
 funcComp1 = funcComp2; // 型がそもそも違うのでエラーになる。
 funcComp2 = funcComp1; // 逆でも同じ。
 
+//Generics ジェネリックス ...Propsに型を指定する際に使われる。（重要）
+interface GEN<T> {
+  item: T; // この時点ではitemの型は定まっていない。
+}
+const gen0: GEN<string> = { item: "hello" }; // 実際に使うとき、動的に定めることができる。
+const gen1: GEN = { item: "hello" }; // <>を付けないとエラーになる。
+const gen2: GEN<number> = { item: 12 };
+
+interface GEN1<T = string> {
+  // この時点で型を指定すると...
+  item: T;
+}
+const gen3: GEN1 = { item: "hello" }; // <>で型をしていしなくてもエラーにならない。
+const gen4: GEN1<number> = { item: 5 }; // 予め型を指定されていた場合でも、再指定できる。
+
+interface GEN2<T extends string | number> {
+  // extendsを記載することで型を制限できる。
+  item: T;
+}
+const gen5: GEN2<string> = { item: "hello" };
+const gen6: GEN2<number> = { item: 50 };
+const gen7: GEN2<boolean> = { item: true }; // エラー
+
+// 関数の場合
+function funcGen<T>(props: T) {
+  return { item: props };
+}
+const gen8 = funcGen<string>("test");
+const gen9 = funcGen<string | null>(null);
+
+function funcGen1<T extends string | null>(props: T) {
+  return { value: props };
+}
+const gen10 = funcGen1("hello");
+const gen11 = funcGen1(123); // エラー
+
+interface Props {
+  price: number;
+}
+function funcGen3<T extends Props>(props: T) {
+  return { value: props.price };
+}
+const gen12 = funcGen3({ price: 10 });
+
+// アロー関数で書いたら
+const funcGen4 = <T extends Props>(props: T) {
+  return { value: props.price};
+}
+
 function App() {
   return (
     <div className="App">
