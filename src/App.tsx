@@ -2,7 +2,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { StringLiteralLike } from "typescript";
-import Data from './data.json';
+import Data from "./data.json";
+import TestComponent from "./TestComponent";
 
 // JSON型推論
 // typeofを使うことでJSONデータで定義されている構造を取得できる。
@@ -118,20 +119,15 @@ const comp1 = "test";
 let comp2: string = comp1; //代入可能。抽象度の高い型の変数に、その中の具体的な文字列の代入は可能。
 
 let comp3: string = "test";
-const comp4: "test" = comp3; //逆はエラーになる。
 
 let funcComp1 = (x: number) => {};
 let funcComp2 = (x: string) => {};
-
-funcComp1 = funcComp2; // 型がそもそも違うのでエラーになる。
-funcComp2 = funcComp1; // 逆でも同じ。
 
 //Generics ジェネリックス ...Propsに型を指定する際に使われる。（重要）
 interface GEN<T> {
   item: T; // この時点ではitemの型は定まっていない。
 }
 const gen0: GEN<string> = { item: "hello" }; // 実際に使うとき、動的に定めることができる。
-const gen1: GEN = { item: "hello" }; // <>を付けないとエラーになる。
 const gen2: GEN<number> = { item: 12 };
 
 interface GEN1<T = string> {
@@ -147,7 +143,6 @@ interface GEN2<T extends string | number> {
 }
 const gen5: GEN2<string> = { item: "hello" };
 const gen6: GEN2<number> = { item: 50 };
-const gen7: GEN2<boolean> = { item: true }; // エラー
 
 // 関数の場合
 function funcGen<T>(props: T) {
@@ -160,7 +155,6 @@ function funcGen1<T extends string | null>(props: T) {
   return { value: props };
 }
 const gen10 = funcGen1("hello");
-const gen11 = funcGen1(123); // エラー
 
 interface Props {
   price: number;
@@ -171,16 +165,19 @@ function funcGen3<T extends Props>(props: T) {
 const gen12 = funcGen3({ price: 10 });
 
 // アロー関数で書いたら
-const funcGen4 = <T extends Props>(props: T) {
-  return { value: props.price};
-}
+const funcGen4 = <T extends Props>(props: T) => {
+  return { value: props.price };
+};
 
-function App() {
+const App: React.FC = () => {
+  // React.FC…Reactの関数コンポーネントに型付けするという意味
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <TestComponent text="hello from App" />
+      </header>
     </div>
   );
-}
+};
 
 export default App;
