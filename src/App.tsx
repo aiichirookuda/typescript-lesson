@@ -108,6 +108,19 @@ const PC2: PC = {
   OSType: OS.Mac,
 };
 
+// 型の互換性
+const comp1 = "test";
+let comp2: string = comp1; //代入可能。抽象度の高い型の変数に、その中の具体的な文字列の代入は可能。
+
+let comp3: string = "test";
+const comp4: "test" = comp3; //逆はエラーになる。
+
+let funcComp1 = (x: number) => {};
+let funcComp2 = (x: string) => {};
+
+funcComp1 = funcComp2; // 型がそもそも違うのでエラーになる。
+funcComp2 = funcComp1; // 逆でも同じ。
+
 function App() {
   return (
     <div className="App">
