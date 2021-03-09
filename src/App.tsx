@@ -2,6 +2,11 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { StringLiteralLike } from "typescript";
+import Data from './data.json';
+
+// JSON型推論
+// typeofを使うことでJSONデータで定義されている構造を取得できる。
+type USERS = typeof Data;
 
 const name = "hello"; //リテラル型
 
